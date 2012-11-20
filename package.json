@@ -9,7 +9,7 @@
     },
     "bugs": "https://github.com/mailjet/Node-JS-Library/issues",
     "main": "./main",
-    "dependencies": {"request": "~2.12.1"},
+    "dependencies": {"request": "~2.12.0"},
     "devDependencies": {},
     "optionalDependencies": {},
     "engines": ["node >= 0.3.6"]
