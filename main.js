@@ -2,12 +2,11 @@ var request = require('request');
 
 var Mailjet = function(options){
     options = copy(options)
-
+    this.apiBaseUrl = 'https://api.mailjet.com/0.1/';
     this.init(options)
 }
 
 Mailjet.prototype.init = function(options) {
-    var self = this
 
     if (!options) options = {}
 
@@ -15,7 +14,32 @@ Mailjet.prototype.init = function(options) {
         console.error('Usage: var mailjet = new Mailjet({apikey:"APIKEY", apisecret:"API_SECRET"})');
     }
 
-    if (process.env.NODE_DEBUG && /mailjet/.test(process.env.NODE_DEBUG)) console.error('REQUEST', options)
+    this.options = options;
+    var auth = "Basic " + new Buffer(options.apikey + ":" + options.apisecret).toString("base64");
+    this.authHeaders = {'Authorization': auth}
 
 
 }
+
+Mailjet.prototype.request = function(APIMethod, params, type, cb) {
+    if (!type) {
+        type = 'GET';
+    }
+
+    var url = this.apiBaseUrl + APIMethod;
+
+    var headers = this.authHeaders;
+
+    options = {
+        method: type,
+        uri: url,
+        json: params,
+        headers: headers,
+
+    };
+
+    return request(options, cb(error, response, body));
+
+}
+
+
