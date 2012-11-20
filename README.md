@@ -19,6 +19,25 @@ initialize mailjet with the init function and your API keys like this:
 
 You can then make requests like this :
 
-    mailjet.request('messageCampaigns', {id: 3245}, 'GET', function(error, response, body) {
-        console.log(body);
+    mj.request('listsAll', 'GET', {
+        success: function(data) {
+            //Do something with the returned data here
+            console.log(data)
+        },
+        error: function(error, data) {
+            //handle error case here.
+            //The body of the response is passed to the callback as well
+            console.log(error, data)
+        }
+    });
+
+    mj.request('messageCampaigns', 'GET', {
+        //pass your request parameters in this object
+        id: '207413',
+        success: function(data) {
+            console.log(data)
+        },
+        error: function(error, data) {
+            console.log(error, data)
+        }
     });
