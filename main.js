@@ -81,7 +81,5 @@ Mailjet.prototype.request = function(APIMethod, type, params) {
 };
 
 
-
-
-
+module.exports = Mailjet;
 
