@@ -1,0 +1,16 @@
+{
+    "author": "Mailjet SAS <plugins@mailjet.com>",
+    "name": "mailjet",
+    "description": "node Library to interact with the mailjet.com REST API",
+    "version": "0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mailjet/Node-JS-Library.git"
+    },
+    "bugs": "https://github.com/mailjet/Node-JS-Library/issues",
+    "main": "./main",
+    "dependencies": {"request": "~2.12.1"},
+    "devDependencies": {},
+    "optionalDependencies": {},
+    "engines": ["node >= 0.3.6"]
+}
