@@ -21,12 +21,34 @@ Mailjet.prototype.init = function(options) {
     this.authHeaders = {'Authorization': auth}
 
 
-}
+};
 
-Mailjet.prototype.request = function(APIMethod, params, type, cb) {
+Mailjet.prototype.request = function(APIMethod, type, params) {
     if (!type) {
         type = 'GET';
     }
+
+    if (!params) {
+        params = {};
+    }
+
+
+    var cbs = {
+        success: params.success,
+        error: params.error,
+    }
+
+    delete params.success;
+    delete params.error;
+
+    var qs = {};
+
+    if(type.toLowerCase() == 'get') {
+        qs = params;
+        params = false;
+    }
+
+    qs.output = 'json';
 
     var url = this.apiBaseUrl + APIMethod;
 
@@ -35,13 +57,31 @@ Mailjet.prototype.request = function(APIMethod, params, type, cb) {
     options = {
         method: type,
         uri: url,
-        json: params,
-        headers: headers,
 
+        headers: headers,
+        qs: qs,
     };
 
-    return request(options, cb(error, response, body));
+    if (params) {
+        options.params = params;
+    }
 
-}
+
+
+
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            return cbs.success(JSON.parse(body));
+        } else {
+            return cbs.error(error, JSON.parse(body));
+        }
+    });
+
+
+};
+
+
+
+
 
 
