@@ -1,6 +1,6 @@
 {
     "author": "Mailjet SAS <plugins@mailjet.com>",
-    "name": "mailjet-node",
+    "name": "mailjet",
     "description": "node Library to interact with the mailjet.com REST API",
     "version": "0.1",
     "repository": {
