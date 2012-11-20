@@ -1,10 +1,12 @@
 var request = require('request');
 
 var Mailjet = function(options){
-    options = copy(options)
+
     this.apiBaseUrl = 'https://api.mailjet.com/0.1/';
-    this.init(options)
-}
+    if (options) {
+        this.init(options);
+    }
+};
 
 Mailjet.prototype.init = function(options) {
 
