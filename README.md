@@ -41,3 +41,9 @@ You can then make requests like this :
             console.log(error, data)
         }
     });
+
+
+License
+-------
+
+node-mailjet is licensed under the MIT License. (See [LICENSE](LICENSE.md))
