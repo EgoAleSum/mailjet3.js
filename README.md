@@ -1,4 +1,4 @@
-Mailjet Nodejs library
+[API v1] Mailjet Nodejs library
 ======================
 
 Installation
