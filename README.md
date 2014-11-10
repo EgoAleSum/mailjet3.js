@@ -1,10 +1,12 @@
-Mailjet Nodejs library
-======================
+node-mailjet-v3
+===============
+
+Fork of [node-mailjet](https://github.com/mailjet/node-mailjet) that supports API v3.
 
 Installation
------------
+------------
 
-    npm install EgoAleSum/node-mailjet
+    npm install mailjet-v3
 
 Usage
 -----
@@ -29,4 +31,4 @@ There is a short-hand method for sending transactional emails:
 License
 -------
 
-node-mailjet is licensed under the MIT License. (See [LICENSE](LICENSE.md))
+node-mailjet-v3 is licensed under the MIT License. (See [LICENSE](LICENSE.md))
