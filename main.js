@@ -1,10 +1,6 @@
 var request = require('request')
 
 function Mailjet(apiKey, apiSecret) {
-	this.init(apiKey, apiSecret)
-}
-
-Mailjet.prototype.init = function(apiKey, apiSecret) {
 	this.apiBaseUrl = 'https://api.mailjet.com/v3/'
 	
 	if(!apiKey || !apiSecret){
