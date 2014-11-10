@@ -1,16 +1,13 @@
-{   "author": "Mailjet SAS <plugins@mailjet.com>",
-    "name": "mailjet",
-    "description": "node Library to interact with the mailjet.com REST API",
-    "version": "0.1.0",
+{   "author": "EgoAleSum",
+    "name": "mailjet-v3",
+    "description": "Fork of node-mailjet interacting with API v3",
+    "version": "0.9.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mailjet/Node-JS-Library.git"
+        "url": "https://github.com/EgoAleSum/node-mailjet"
     },
-    "bugs": {"url": "https://github.com/mailjet/Node-JS-Library/issues"},
+    "bugs": {"url": "https://github.com/EgoAleSum/node-mailje/issues"},
     "main": "./main",
-    "dependencies": {"request": "~2.12.0"},
-    "devDependencies": {},
-    "optionalDependencies": {},
-    "engines": ["node >= 0.3.6"],
+    "dependencies": {"request": "2.47.*"},
     "scripts": { "test": "node tests/run.js" }
 }

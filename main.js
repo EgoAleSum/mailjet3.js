@@ -1,85 +1,86 @@
-var request = require('request');
+var request = require('request')
 
-var Mailjet = function(options){
+function Mailjet(apiKey, apiSecret) {
+	this.apiBaseUrl = 'https://api.mailjet.com/v3/'
+	
+	this.init(apiKey, apiSecret)
+}
 
-    this.apiBaseUrl = 'https://api.mailjet.com/0.1/';
-    if (options) {
-        this.init(options);
-    }
-};
+Mailjet.prototype.init = function(apiKey, apiSecret) {
+	if(!apiKey || !apiSecret){
+		return new Error('Usage: var mailjet = new Mailjet({apikey:"APIKEY", apisecret:"API_SECRET"})')
+	}
+	
+	var auth = "Basic " + new Buffer(apiKey + ":" + apiSecret).toString("base64")
+	this.authHeaders = {'Authorization': auth}
+}
 
-Mailjet.prototype.init = function(options) {
+Mailjet.prototype.request = function(APIMethod, type, params, successCb, errorCb) {
+	if(!type) {
+		type = 'GET'
+	}
+	type = type.toUpperCase()
 
-    if (!options) options = {}
+	if(!params) {
+		params = {}
+	}
+	
+	// Querystring params
+	var qs = {}
+	if(type == 'GET') {
+		qs = params
+		params = false
+	}
+	qs.output = 'json'
+	
+	var url = this.apiBaseUrl + APIMethod
+	
+	var headers = this.authHeaders
+	
+	var options = {
+		method: type,
+		uri: url,
+		headers: headers,
+		qs: qs,
+	}
+	
+	if(params) {
+		options.params = params
+	}
+	
+	request(options, function(err, response, body) {
+		if(!err && response.statusCode == 200) {
+			if(successCb) successCb(JSON.parse(body))
+			return
+		}
+		else {
+			if(errorCb) errorCb(err, JSON.parse(body))
+			return
+		}
+	})
+}
 
-    if (!options.apikey || !options.apisecret){
-        console.error('Usage: var mailjet = new Mailjet({apikey:"APIKEY", apisecret:"API_SECRET"})');
-    }
+// Send transactional emails
+/* params is an object:
+	Required:
+		from, to, subject
+	One of:
+		html, text
+	Optional:
+		cc, bcc,
+		attachment, inlineattachment,
+		header,
+		mj-prio, mj-campaign, mj-deduplicatecampaign, mj-trackopen, mj-trackclick
+*/
+Mailjet.prototype.send = function(params, successCb, errorCb) {
+	if(!params.from || !params.to || !params.subject) {
+		return new Error('Arguments from, to and subject are required')
+	}
+	if((!params.html && !params.text) || (params.html && params.text)) { // XOR
+		return new Error('You must specify one and only one of contents.html and contents.text')
+	}
+	
+	this.request('send/message', 'POST', params, successCb, errorCb)
+}
 
-    this.options = options;
-    var auth = "Basic " + new Buffer(options.apikey + ":" + options.apisecret).toString("base64");
-    this.authHeaders = {'Authorization': auth}
-
-
-};
-
-Mailjet.prototype.request = function(APIMethod, type, params) {
-    if (!type) {
-        type = 'GET';
-    }
-
-    if (!params) {
-        params = {};
-    }
-
-
-    var cbs = {
-        success: params.success,
-        error: params.error,
-    }
-
-    delete params.success;
-    delete params.error;
-
-    var qs = {};
-
-    if(type.toLowerCase() == 'get') {
-        qs = params;
-        params = false;
-    }
-
-    qs.output = 'json';
-
-    var url = this.apiBaseUrl + APIMethod;
-
-    var headers = this.authHeaders;
-
-    options = {
-        method: type,
-        uri: url,
-
-        headers: headers,
-        qs: qs,
-    };
-
-    if (params) {
-        options.params = params;
-    }
-
-
-
-
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            return cbs.success(JSON.parse(body));
-        } else {
-            return cbs.error(error, JSON.parse(body));
-        }
-    });
-
-
-};
-
-
-module.exports = Mailjet;
-
+module.exports = Mailjet
