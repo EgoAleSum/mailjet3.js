@@ -1,10 +1,10 @@
-[API v1] Mailjet Nodejs library
+Mailjet Nodejs library
 ======================
 
 Installation
 -----------
 
-    npm install mailjet
+    npm install EgoAleSum/node-mailjet
 
 Usage
 -----
