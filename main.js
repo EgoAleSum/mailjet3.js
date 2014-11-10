@@ -4,7 +4,7 @@ function Mailjet(apiKey, apiSecret) {
 	this.apiBaseUrl = 'https://api.mailjet.com/v3/'
 	
 	if(!apiKey || !apiSecret){
-		return new Error('Usage: var mailjet = new Mailjet({apikey:"APIKEY", apisecret:"API_SECRET"})')
+		return new Error('Usage: var mj = new Mailjet("APIKEY", "API_SECRET"})')
 	}
 	
 	var auth = "Basic " + new Buffer(apiKey + ":" + apiSecret).toString("base64")
@@ -21,14 +21,6 @@ Mailjet.prototype.request = function(APIMethod, type, params, successCb, errorCb
 		params = {}
 	}
 	
-	// Querystring params
-	var qs = {}
-	if(type == 'GET') {
-		qs = params
-		params = false
-	}
-	qs.output = 'json'
-	
 	var url = this.apiBaseUrl + APIMethod
 	
 	var headers = this.authHeaders
@@ -37,13 +29,15 @@ Mailjet.prototype.request = function(APIMethod, type, params, successCb, errorCb
 		method: type,
 		uri: url,
 		headers: headers,
-		qs: qs,
 	}
 	
-	if(params) {
-		options.params = params
+	if(type == 'POST') {
+		options.formData = params
 	}
-	
+	else {
+		options.qs = params
+	}
+		
 	request(options, function(err, response, body) {
 		if(!err && response.statusCode == 200) {
 			if(successCb) successCb(JSON.parse(body))
