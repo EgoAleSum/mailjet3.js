@@ -1,19 +1,19 @@
-node-mailjet-v3
-===============
+mailjet.js
+==========
 
 Fork of [node-mailjet](https://github.com/mailjet/node-mailjet) that supports API v3.
 
 Installation
 ------------
 
-    npm install mailjet-v3
+    npm install mailjet3
 
 Usage
 -----
 
 Load the `mailjet` module with:
 
-	var Mailjet = require('mailjet')
+	var Mailjet = require('mailjet3')
 
 Initialize mailjet with your API keys:
 
@@ -31,4 +31,4 @@ There is a short-hand method for sending transactional emails:
 License
 -------
 
-node-mailjet-v3 is licensed under the MIT License. (See [LICENSE](LICENSE.md))
+mailjet.js is licensed under the MIT License. See [LICENSE](LICENSE.md).

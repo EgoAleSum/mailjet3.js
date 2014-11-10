@@ -1,13 +1,13 @@
 {
 	"author": "EgoAleSum",
-	"name": "mailjet-v3",
+	"name": "mailjet3",
 	"description": "Fork of node-mailjet that supports API v3",
 	"version": "0.9.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/EgoAleSum/node-mailjet-v3"
+		"url": "https://github.com/EgoAleSum/mailjet3.js"
 	},
-	"bugs": {"url": "https://github.com/EgoAleSum/node-mailjet-v3/issues"},
+	"bugs": {"url": "https://github.com/EgoAleSum/mailjet3.js/issues"},
 	"main": "./main",
 	"dependencies": {"request": "2.47.*"}
 }
