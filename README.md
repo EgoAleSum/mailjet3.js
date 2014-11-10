@@ -1,5 +1,5 @@
-mailjet.js
-==========
+mailjet3.js
+===========
 
 [![Tip](https://img.shields.io/gratipay/EgoAleSum.svg?style=flat)](https://gratipay.com/EgoAleSum)
 [![NPM](https://img.shields.io/npm/v/mailjet3.svg?style=flat)](https://www.npmjs.org/package/mailjet3)
