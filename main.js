@@ -40,11 +40,11 @@ Mailjet.prototype.request = function(APIMethod, type, params, successCb, errorCb
 		
 	request(options, function(err, response, body) {
 		if(!err && response.statusCode == 200) {
-			if(successCb) successCb(JSON.parse(body))
+			if(successCb) successCb(JSON.parse(body) || {})
 			return
 		}
 		else {
-			if(errorCb) errorCb(err, JSON.parse(body))
+			if(errorCb) errorCb(err, JSON.parse(body) || {})
 			return
 		}
 	})
