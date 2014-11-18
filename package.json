@@ -9,5 +9,5 @@
 	},
 	"bugs": {"url": "https://github.com/EgoAleSum/mailjet3.js/issues"},
 	"main": "./main",
-	"dependencies": {"request": "2.47.*"}
+	"dependencies": {"request": "2.48.*"}
 }
